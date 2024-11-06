@@ -1,0 +1,30 @@
+{
+  "installation": {
+    "version": "20.0.9",
+    "plugins": {
+      "@nx/node": "20.0.9"
+    }
+  },
+  "nxCloudId": "672b1bad011db4165bb653c7",
+  "targetDefaults": {
+    "@nx/esbuild:esbuild": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["default", "^default"]
+    }
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      }
+    }
+  ]
+}

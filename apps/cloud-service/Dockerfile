@@ -17,6 +17,8 @@ FROM base as builder
 
 COPY . .
 
+COPY package.json .
+
 RUN npm i
 
 RUN npx nx run cloud-service:build
@@ -29,7 +31,7 @@ WORKDIR /app
 
 COPY --from=builder app/dist/apps/cloud-service .
 
-COPY package*.json .
+COPY package.json .
 
 RUN chown -R cloud-service:cloud-service .
 

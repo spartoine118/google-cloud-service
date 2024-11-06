@@ -34,7 +34,7 @@ export function createGoogleAuthentication({
 
       if (payload.email !== serviceAccountEmail) {
         throw new Error(
-          `Service account doesn't match current: ${payload.email} set up ${process.env.DOCUMENT_TOPIC_SERVICE_ACCOUNT_EMAIL}`
+          `Service account doesn't match current: ${payload.email} set up ${process.env.SERVICE_ACCOUNT_EMAIL}`
         );
       }
 

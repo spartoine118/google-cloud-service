@@ -17,8 +17,6 @@ FROM base as builder
 
 COPY . .
 
-COPY package.json .
-
 RUN npm i
 
 RUN npx nx run cloud-service:build

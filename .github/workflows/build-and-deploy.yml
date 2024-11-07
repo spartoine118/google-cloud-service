@@ -48,5 +48,5 @@ jobs:
           # NOTE: You can also set env variables here:
           env_vars: |-
             AUDIENCE=https://cloud-service-358464210743.us-central1.run.app
-            SERVICE_ACCOUNT_EMAIL=aerial-freehold-440804-m1@appspot.gserviceaccount.com
+            SERVICE_ACCOUNT_EMAIL= ${{secrets.GKE_SA_EMAIL}}
             TOKEN_EXPIRE=6400

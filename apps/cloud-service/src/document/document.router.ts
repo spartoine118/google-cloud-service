@@ -1,10 +1,12 @@
 import Router from 'koa-router';
 import { validate } from 'koa-middleware';
 import z from 'zod';
+import { logger } from '../core/logger/logger';
 
 export const documentRouter = new Router();
 
 documentRouter.get('/document', async (ctx) => {
+  logger('Authorized passed and in /document path', 'info');
   ctx.status = 200;
   ctx.body = { message: 'Hello world' };
 });

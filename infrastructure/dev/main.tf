@@ -19,7 +19,7 @@ module "storage" {
 
 resource "local_file" "default" {
   file_permission = "0644"
-  filename        = "${path.module}/${var.ENV}/backend.tf"
+  filename        = "${path.module}/backend.tf"
 
   # You can store the template in a file and use the templatefile function for
   # more modularity, if you prefer, instead of storing the template inline as

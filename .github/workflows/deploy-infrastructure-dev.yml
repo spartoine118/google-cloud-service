@@ -35,6 +35,13 @@ jobs:
       - name: setup terraform
         uses: hashicorp/setup-terraform@v3
 
+        # SETUP BACKEND FILE
+      - name: terraform init infrastructure
+        run: terraform -chdir=infrastructure/${{env.ENV}}/state init -input=false
+
+      - name: terraform init infrastructure
+        run: terraform -chdir=infrastructure/${{env.ENV}}/state apply -input=false -auto-approve
+
         # PULL STATE FROM CLOUD STORAGE
       - name: terraform init infrastructure
         run: terraform -chdir=infrastructure/${{env.ENV}} init -migrate-state -input=false

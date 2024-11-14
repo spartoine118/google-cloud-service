@@ -7,10 +7,6 @@ terraform {
   }
 }
 
-resource "random_id" "default" {
-  byte_length = 8
-}
-
 resource "local_file" "default" {
   file_permission = "0644"
   filename        = "${path.module}/backend.tf"

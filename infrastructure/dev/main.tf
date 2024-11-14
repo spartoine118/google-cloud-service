@@ -27,7 +27,7 @@ resource "local_file" "default" {
   content = <<-EOT
   terraform {
     backend "gcs" {
-      bucket = "${var.storage_name}"
+      bucket = "${module.storage.name}"
     }
   }
   EOT

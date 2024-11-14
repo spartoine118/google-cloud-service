@@ -24,12 +24,6 @@ variable "DOCKER_IMAGE" {
   default  = "spartoine118/cloud-service:11718396221"
 }
 
-variable "SA_KEY" {
-  type      = string
-  nullable  = false
-  sensitive = true
-}
-
 data "google_secret_manager_secret_version" "SA_EMAIL" {
   secret  = "GKE_SA_EMAIL"
   version = "latest"

@@ -28,6 +28,7 @@ resource "local_file" "default" {
   terraform {
     backend "gcs" {
       bucket = "${module.storage.name}"
+      prefix = "${var.ENV}/"
     }
   }
   EOT

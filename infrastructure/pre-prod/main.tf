@@ -17,6 +17,11 @@ module "storage" {
   location = var.REGION
 }
 
+resource "google_storage_bucket_object" "content_folder" {
+  name   = "${var.ENV}/"
+  bucket = var.storage_name
+}
+
 resource "local_file" "default" {
   file_permission = "0644"
   filename        = "${path.module}/${var.ENV}/backend.tf"

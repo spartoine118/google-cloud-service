@@ -6,7 +6,7 @@ jobs:
   main:
     runs-on: ubuntu-latest
     env:
-      IMAGE_TAG: spartoine118/cloud-service:11718396221
+      IMAGE_NAME: spartoine118/cloud-service:11718396221
       SERVICE: cloud-function-dev
       REGION: us-central1
     steps:
@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_LOGIN }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
       # - name: build images and push images
-      #   run: docker buildx build --push --platform linux/amd64 -f apps/cloud-service/Dockerfile -t spartoine118/cloud-service:${{env.IMAGE_TAG}} .
+      #   run: docker buildx build --push --platform linux/amd64 -f apps/cloud-service/Dockerfile -t spartoine118/cloud-service: .
 
       - id: 'secrets'
         uses: 'google-github-actions/get-secretmanager-secrets@v2'
@@ -48,7 +48,7 @@ jobs:
         with:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
-          image: spartoine118/cloud-service:${{env.IMAGE_TAG}}
+          image: ${{env.IMAGE_NAME}}
           # NOTE: You can also set env variables here:
           env_vars: |-
             SERVICE_ACCOUNT_EMAIL=${{steps.secrets.outputs.SA_EMAIL}}

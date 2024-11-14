@@ -18,8 +18,9 @@ module "storage" {
 }
 
 resource "google_storage_bucket_object" "content_folder" {
-  name   = "${var.ENV}/"
-  bucket = var.storage_name
+  name    = "${var.ENV}/"
+  content = "nothing"
+  bucket  = var.storage_name
 }
 
 resource "local_file" "default" {

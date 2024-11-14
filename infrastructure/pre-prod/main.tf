@@ -11,12 +11,6 @@ resource "random_id" "default" {
   byte_length = 8
 }
 
-module "storage" {
-  source   = "../modules/google-storage-bucket"
-  name     = var.storage_name
-  location = var.REGION
-}
-
 resource "local_file" "default" {
   file_permission = "0644"
   filename        = "${path.module}/backend.tf"

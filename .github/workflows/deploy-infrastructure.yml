@@ -23,6 +23,15 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
       # - name: build images and push images
       #   run: docker buildx build --push --platform linux/amd64 -f apps/cloud-service/Dockerfile -t spartoine118/cloud-service:${{env.IMAGE_TAG}} .
+
+      # Authenticate to google
+      - uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: ${{ secrets.GKE_SA_KEY }}
+      # Setup gcloud CLI
+      - uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GKE_PROJECT }}
       - name: setup terraform
         uses: hashicorp/setup-terraform@v3
 

@@ -33,6 +33,7 @@ module "service" {
   name            = "cloud-function-dev"
   location        = var.REGION
   service_account = data.google_secret_manager_secret_version.SA_EMAIL.secret_data
+  container_env   = var.container_env
 }
 
 module "scheduler" {

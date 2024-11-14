@@ -1,15 +1,14 @@
-locals {
-  service_account_email = [{
-    name  = "SERVICE_ACCOUNT_EMAIL"
-    value = var.service_account
-  }]
-}
-
 variable "container_env" {
   description = "environment variables inside the container"
   type = list(object({
     name  = string
     value = string
   }))
-  nullable = false
+  default = [{
+    name  = "ENV"
+    value = "PRE_PROD"
+    }, {
+    name  = "STATIC_ENVVAR"
+    value = "STATIC VALUE"
+  }]
 }

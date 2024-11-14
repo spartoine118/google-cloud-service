@@ -11,12 +11,6 @@ resource "random_id" "default" {
   byte_length = 8
 }
 
-module "storage" {
-  source   = "../modules/google-storage-bucket"
-  name     = "cloud-function-bucket-dev-7674705bf818c9ea"
-  location = var.REGION
-}
-
 resource "local_file" "default" {
   file_permission = "0644"
   filename        = "${path.module}/${var.ENV}/backend.tf"
@@ -27,7 +21,7 @@ resource "local_file" "default" {
   content = <<-EOT
   terraform {
     backend "gcs" {
-      bucket = "${module.storage.name}"
+      bucket = "${var.storage_name}"
     }
   }
   EOT

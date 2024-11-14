@@ -28,3 +28,9 @@ data "google_secret_manager_secret_version" "SA_EMAIL" {
   secret  = "GKE_SA_EMAIL"
   version = "latest"
 }
+
+variable "storage_name" {
+  type     = string
+  nullable = false
+  default  = "cloud-function-bucket-dev-7674705bf818c9ea"
+}

@@ -36,14 +36,14 @@ resource "local_file" "default" {
 module "service" {
   source          = "../modules/google-cloud-service"
   image_name      = var.DOCKER_IMAGE
-  name            = "cloud-function-dev"
+  name            = "cloud-function-pre-prod"
   location        = var.REGION
   service_account = data.google_secret_manager_secret_version.SA_EMAIL.secret_data
 }
 
 module "scheduler" {
   source                = "../modules/google-cloud-scheduler"
-  name                  = "cloud-service-daily-scheduler-dev"
+  name                  = "cloud-service-daily-scheduler-pre-prod"
   uri                   = module.service.service_uri
   service_account_email = data.google_secret_manager_secret_version.SA_EMAIL.secret_data
   audience              = module.service.service_uri

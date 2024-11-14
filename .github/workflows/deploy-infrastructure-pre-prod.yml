@@ -1,0 +1,43 @@
+name: deploy-infrastructure-pre-prod
+on:
+  workflow_dispatch:
+
+env:
+  ENV: pre-prod
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_TAG: spartoine118/cloud-service:11718396221
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: nrwl/nx-set-shas@v4
+      - name: Docker Login
+        uses: docker/login-action@v1.6.0
+        with:
+          username: ${{ secrets.DOCKER_HUB_LOGIN }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+      # - name: build images and push images
+      #   run: docker buildx build --push --platform linux/amd64 -f apps/cloud-service/Dockerfile -t spartoine118/cloud-service:${{env.IMAGE_TAG}} .
+
+      # Authenticate to google
+      - uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: ${{ secrets.GKE_SA_KEY }}
+      # Setup gcloud CLI
+      - uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GKE_PROJECT }}
+      - name: setup terraform
+        uses: hashicorp/setup-terraform@v3
+
+        # PULL STATE FROM CLOUD STORAGE
+      - name: terraform init infrastructure
+        run: terraform -chdir=infrastructure/${{env.ENV}} init -migrate-state -input=false
+
+      - name: terraform apply infrastructure
+        run: terraform -chdir=infrastructure/${{env.ENV}} apply -input=false -auto-approve

@@ -10,5 +10,9 @@ variable "container_env" {
     }, {
     name  = "STATIC_ENVVAR"
     value = "STATIC VALUE"
+    },
+    {
+      name  = "TEST_VAR"
+      value = "Hello World"
   }]
 }
